@@ -1,0 +1,68 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+
+# Alias to quickly compile C/C++ etc.
+compile() {
+    if [ -z "$1" ]; then
+        echo "Error: you must specify a source file to compile."
+        return 1
+    fi
+
+    src="$1"
+    shift
+    extra_flags=("$@")
+
+    ext="${src##*.}"
+    base=$(basename "$src" ".$ext")
+
+    case "$ext" in
+        c)
+            echo "Compiling C file: $src"
+            echo "Running: gcc \"$src\" -o \"$base\" ${extra_flags[*]}"
+            gcc "$src" -o "$base" "${extra_flags[@]}"
+            ;;
+        cpp|cc|cxx|c++)
+            echo "Compiling C++ file: $src"
+            echo "Running: g++ \"$src\" -o \"$base\" ${extra_flags[*]}"
+            g++ "$src" -o "$base" "${extra_flags[@]}"
+            ;;
+        m)
+            echo "Compiling Objective-C file: $src"
+            echo "Running: gcc \"$src\" -o \"$base\" -lobjc ${extra_flags[*]}"
+            gcc "$src" -o "$base" -lobjc "${extra_flags[@]}"
+            ;;
+        mm)
+            echo "Compiling Objective-C++ file: $src"
+            echo "Running: g++ \"$src\" -o \"$base\" -lobjc ${extra_flags[*]}"
+            g++ "$src" -o "$base" -lobjc "${extra_flags[@]}"
+            ;;
+        *)
+            echo "Error: unsupported file extension '$ext'"
+            return 2
+            ;;
+    esac
+}
+
+export PATH="$PATH:/home/alessandro/.foundry/bin"
+export PATH=$HOME/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
+export EDITOR=nvim
+
+export JAVA_HOME=/usr/lib/jvm/$(archlinux-java get)
+export PATH=$JAVA_HOME/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/share/nvm/nvm.sh" ] && \. "/usr/share/nvm/nvm.sh"
+
+eval "$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/themes/EDM115-newline.omp.json)"
+. "$HOME/.cargo/env"
+
