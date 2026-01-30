@@ -64,5 +64,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/share/nvm/nvm.sh" ] && \. "/usr/share/nvm/nvm.sh"
 
 eval "$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/themes/EDM115-newline.omp.json)"
-. "$HOME/.cargo/env"
-
