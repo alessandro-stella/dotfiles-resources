@@ -51,8 +51,6 @@ compile() {
     esac
 }
 
-export PATH="$PATH:/home/alessandro/.foundry/bin"
-export PATH=$HOME/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 export EDITOR=nvim
@@ -60,7 +58,6 @@ export EDITOR=nvim
 export JAVA_HOME=/usr/lib/jvm/$(archlinux-java get)
 export PATH=$JAVA_HOME/bin:$PATH
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/share/nvm/nvm.sh" ] && \. "/usr/share/nvm/nvm.sh"
-
-eval "$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/themes/EDM115-newline.omp.json)"
+# eval "$(starship init bash)"
+eval "$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/themes/current_theme.omp.json)"
+. "$HOME/.cargo/env"
