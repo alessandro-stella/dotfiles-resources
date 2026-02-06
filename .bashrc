@@ -60,4 +60,3 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 # eval "$(starship init bash)"
 eval "$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/themes/current_theme.omp.json)"
-. "$HOME/.cargo/env"
